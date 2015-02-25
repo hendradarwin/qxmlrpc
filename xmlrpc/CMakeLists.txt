@@ -22,7 +22,7 @@ SET(KIT_MOC_SRCS
   server_private.h
   )
   
-QT4_WRAP_CPP(KIT_MOC_CPP ${KIT_MOC_SRCS})
+QT5_WRAP_CPP(KIT_MOC_CPP ${KIT_MOC_SRCS})
 
 SET(libname ${PROJECT_NAME})
 ADD_LIBRARY(${libname} STATIC
@@ -30,11 +30,10 @@ ADD_LIBRARY(${libname} STATIC
   ${KIT_MOC_CPP}
   )
   
-SET(${PROJECT_NAME}_LINK_LIBRARIES ${QT_LIBRARIES})
-TARGET_LINK_LIBRARIES(
-  ${libname}
-  ${${PROJECT_NAME}_LINK_LIBRARIES}
-  )
+target_link_libraries(${libname} Qt5::Core Qt5::Network Qt5::Xml)
+
+#SET(${PROJECT_NAME}_LINK_LIBRARIES ${QT_LIBRARIES})
+#TARGET_LINK_LIBRARIES(${libname}  ${${PROJECT_NAME}_LINK_LIBRARIES})
   
 #-----------------------------------------------------------------------------
 #

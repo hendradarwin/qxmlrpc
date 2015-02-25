@@ -4,8 +4,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <qobject.h>
-#include <QHttp>
+#include <Qobject>
+//#include <QHttp>
+#include <QNetworkAccessManager>
+
 
 #include "xmlrpc/variant.h"
 class QAuthenticator;

@@ -19,12 +19,20 @@ FOREACH(type LIBRARY RUNTIME ARCHIVE)
 ENDFOREACH()
 
 #-----------------------------------------------------------------------------
-# Qt
-#
-FIND_PACKAGE(Qt4 4.6 REQUIRED)
-SET(QT_USE_QTNETWORK ON)
-SET(QT_USE_QTXML ON)
-INCLUDE(${QT_USE_FILE})
+# Qt4
+#-----------------------------------------------------------------------------
+#FIND_PACKAGE(Qt5 4.6 REQUIRED)
+#SET(QT_USE_QTNETWORK ON)
+#SET(QT_USE_QTXML ON)
+#INCLUDE(${QT_USE_FILE})
+
+
+#-----------------------------------------------------------------------------
+# Qt5
+#-----------------------------------------------------------------------------
+set(QXMLRPC_QT5_COMPONENTS Core Xml XmlPatterns Network)
+find_package(Qt5 COMPONENTS ${QXMLRPC_QT5_COMPONENTS} REQUIRED)
+
 
 
 #-----------------------------------------------------------------------------
@@ -35,6 +43,12 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   )
+  
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+add_definitions(${Qt5Widgets_DEFINITIONS})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")  
+  
+  
 ADD_SUBDIRECTORY(xmlrpc)
 
 

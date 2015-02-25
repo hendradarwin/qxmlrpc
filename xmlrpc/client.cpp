@@ -5,7 +5,7 @@
 #include "xmlrpc/request.h"
 #include "xmlrpc/response.h"
 
-#include <qhttp.h>
+//#include <qhttp.h>
 #include <qbuffer.h>
 #include <QtNetwork>
 #include <QAuthenticator>
@@ -26,7 +26,8 @@ public:
 
     QString userAgent;
 
-    QHttp *http;
+    //QHttp *http;
+	QNetworkAccessManager http;
 
     QAuthenticator proxyAuth;
 
@@ -44,15 +45,20 @@ Client::Client(QObject * parent)
     d->port = 0;
     d->path = "/";
     d->userAgent = "QXMLRPC";
-    d->http = new QHttp(this);
+    //d->http = new QHttp(this);
 
-    connect( d->http, SIGNAL(requestFinished(int,bool)), SLOT(requestFinished(int,bool)) );
+    //connect( d->http, SIGNAL(requestFinished(int,bool)), SLOT(requestFinished(int,bool)) );
 
-    connect( d->http, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &, QAuthenticator *)),
-             this, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &, QAuthenticator *) ) );
+    //connect( d->http, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &, QAuthenticator *)),
+    //         this, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy &, QAuthenticator *) ) );
 
-    connect( d->http, SIGNAL( authenticationRequired ( const QString &, quint16, QAuthenticator * ) ),
-             this, SIGNAL( authenticationRequired ( const QString &, quint16, QAuthenticator * ) ) );
+    //connect( d->http, SIGNAL( authenticationRequired ( const QString &, quint16, QAuthenticator * ) ),
+    //         this, SIGNAL( authenticationRequired ( const QString &, quint16, QAuthenticator * ) ) );
+
+
+	connect(&d->http, SIGNAL(finished(QNetworkReply *)), this, SLOT(finishedSlt(QNetworkReply *)));
+
+
 }
 
 /**

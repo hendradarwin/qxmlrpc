@@ -4,6 +4,8 @@
 #ifndef XMLRPC_SERVER_H
 #define XMLRPC_SERVER_H
 
+#include <QtNetwork/>
+//#include <QNetwork>
 #include <QTcpServer>
 #include <QPointer>
 
